@@ -13,13 +13,24 @@ export default function Home(data: object[]) {
 
   useEffect(() => {
     console.log("useeffect is running");
-    fetch('http://localhost:3000/api/blogs').then((a) => {
+    if(process.env.ENVIORMENT == "dev"){
+      fetch('http://localhost:3000/api/blogs').then((a) => {
       return a.json();
     })
       .then((parsed) => {
         console.log(parsed)
         setBlogs(parsed)
       })
+    }
+    else if(process.env.ENVIORMENT == "prod"){
+      fetch('https://blog-templates-demo.vercel.app/api/blogs').then((a) => {
+      return a.json();
+    })
+      .then((parsed) => {
+        console.log(parsed)
+        setBlogs(parsed)
+      })
+    }
   }, [])
 
   return (
