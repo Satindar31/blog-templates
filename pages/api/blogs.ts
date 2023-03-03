@@ -8,5 +8,5 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const blogs: object = await fs.readdir("./blogdata/", "utf-8")
-  res.status(200).json(JSON.parse(JSON.stringify(blogs)))
+  res.status(200).json({blogs})
 }
