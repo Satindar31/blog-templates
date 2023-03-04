@@ -33,21 +33,27 @@ export default function Home(data: any) {
 
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-  let data;
+/**
+  🔎️🔗️🔃️
+  */
+   let data;
+  try {
+    if (process.env.ENVIORMENT == "dev") {
 
-  if (process.env.ENVIORMENT == "dev") {
-    data = await fetch("http://localhost:3000/api/blogs")
-    data = await data.json()
-    console.log(data.blogs)
+      data = await fetch("http://localhost:3000/api/blogs") // 🔗️
+      data = await data.json() // 🔃️
+      console.log(data.blogs) // 🔎️
+    }
+    else if (process.env.ENVIORMENT == "prod") {
+      data = await fetch("https://blog-templates-demo.vercel.app/api/blogs") // 🔗️
+      console.log(data)
+      data = await data.json() // 🔃️
+      console.log(data.blogs) // 🔎️
+      data = data.blogs
+    }
   }
-  else if (process.env.ENVIORMENT == "prod") {
-    data = await fetch("https://blog-templates-demo.vercel.app/api/blogs")
-    console.log(data)
-    data = await data.json()
-    console.log(data.blogs)
-    data = data.blogs
+  catch (err) {
+    console.error(err) // 🚫️
   }
-
-  return { props: {data} }
+  return { props: { data } } // 📦️
 }
