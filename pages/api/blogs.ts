@@ -8,13 +8,6 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   let blogs;
-  if(process.env.ENVIORMENT == "dev") {
-    blogs = await fs.readdir("./public/blogdata/", "utf-8")
-    console.log(process.cwd())
-  }
-  else {
-    blogs = await fs.readlink("https://blog-templates-demo.vercel.app/blogdata/")
-  }
-
-  res.status(200).json({blogs})
+  blogs = await fs.readdir("./public/blogdata/", "utf-8")
+  res.status(200).json({ blogs })
 }
