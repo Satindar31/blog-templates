@@ -7,6 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const blogs: object = await fs.readdir("./blogdata/", "utf-8")
+  const blogs: object = await fs.readdir(process.cwd() + "/blogdata/", "utf-8")
+  console.log(process.cwd())
   res.status(200).json({blogs})
 }

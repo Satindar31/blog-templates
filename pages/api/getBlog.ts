@@ -9,7 +9,8 @@ export default async function handler(
 ) {
   const { slug } = req.query
   try {
-    const file = await fs.readFile("blogdata/" + slug, "utf-8")
+    const file = await fs.readFile(process.cwd() + "blogdata/" + slug, "utf-8")
+    console.log(process.cwd())
     const fileParsed = await JSON.parse(file)
     res.status(200).send({ fileParsed })
   }
