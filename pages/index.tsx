@@ -5,6 +5,8 @@ import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import * as fs from 'fs/promises'
+
 
 export default function Home(data: any) {
 
@@ -39,12 +41,12 @@ export async function getServerSideProps() {
    let data;
   try {
     if (process.env.ENVIORMENT == "dev") {
-
       data = await fetch("http://localhost:3000/api/blogs") // 🔗️
+      // http://localhost:3000/api/blogs
       data = await data.json() // 🔃️
       console.log(data.blogs) // 🔎️
     }
-    else if (process.env.ENVIORMENT == "prod") {
+    else {
       data = await fetch("https://blog-templates-demo.vercel.app/api/blogs") // 🔗️
       console.log(data)
       data = await data.json() // 🔃️
